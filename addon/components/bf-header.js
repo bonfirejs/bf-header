@@ -1,21 +1,33 @@
-/**
-* @property appName is a computed property that first checks the consuming app config/environment.js
-* for APP.bonfire.title
-* APP:  {
-*  bonfire: {
-*    title: 'Your App Name'
-*  }
-* }
-* If this is not provided then it will fetch from application.namespace.name
-*/
-
 import Ember from 'ember';
 import layout from '../templates/components/bf-header';
 
+/**
+  This component includes the application name and bf-nav in a header.
+
+  @class BfHeader
+*/
 export default Ember.Component.extend({
   layout: layout,
+  /**
+    By default, bf-header will use the application name specified when
+    initializing the Ember project. To customize the displayed name, add a
+    bonfire.title property to ENV in config/environment.js:
+
+    ```javascript
+    var ENV = {
+      bonfire: {
+        title: 'Your App Name'
+      }
+    };
+    ```
+
+    @property appName
+    @type String
+    @default application.namespace.name
+    @return {String} Application name
+  */
   appName: function() {
-    var configTitle = this.container.lookupFactory('config:environment').APP.bonfire.title;
+    var configTitle = this.container.lookupFactory('config:environment').bonfire.title;
     if (Ember.isEmpty(configTitle)) {
       return Ember.String.capitalize(this.get('application.namespace.name'));
     } else {
