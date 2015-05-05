@@ -29,11 +29,11 @@ export default Ember.Component.extend({
     @return {String} Application name
   */
   appName: function() {
-    var configTitle = this.container.lookupFactory('config:environment').APP.bonfire.title;
-    if (Ember.isEmpty(configTitle)) {
-      return Ember.String.capitalize(this.get('application.namespace.name'));
+    var ENV = this.container.lookupFactory('config:environment');
+    if (ENV.APP && ENV.APP.bonfire && ENV.APP.bonfire.title) {
+      return ENV.APP.bonfire.title;
     } else {
-      return configTitle;
+      return Ember.String.capitalize(ENV.APP.name);
     }
-  }.property('application.namespace.name')
+  }.property()
 });
