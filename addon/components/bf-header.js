@@ -15,8 +15,8 @@ import layout from '../templates/components/bf-header';
 export default Ember.Component.extend({
   layout: layout,
   appName: function() {
-    var configTitle = this.container.lookupFactory('config:environment').APP.bonfire.title;
-    if (Ember.isEmpty(configTitle)) {
+    var config = this.container.lookupFactory('config:environment');
+    if (Ember.isEmpty(config.APP.bonfire) || Ember.isEmpty(config.APP.bonfire.title) ) {
       return Ember.String.capitalize(this.get('application.namespace.name'));
     } else {
       return configTitle;
