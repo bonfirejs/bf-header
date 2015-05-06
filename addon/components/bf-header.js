@@ -28,12 +28,12 @@ export default Ember.Component.extend({
     @default application.namespace.name
     @return {String} Application name
   */
-  appName: function() {
+  appName: Ember.computed(function() {
     var ENV = this.container.lookupFactory('config:environment');
     if (ENV.APP && ENV.APP.bonfire && ENV.APP.bonfire.title) {
       return ENV.APP.bonfire.title;
     } else {
       return Ember.String.capitalize(ENV.APP.name);
     }
-  }.property()
+  })
 });

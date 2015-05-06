@@ -3,19 +3,17 @@ import {
   test
 } from 'ember-qunit';
 
+import ENV from "dummy/config/environment";
+
 moduleForComponent('bf-header', {
   // specify the other units that are required for this test
   // needs: ['component:foo', 'helper:bar']
 });
 
-test('it renders', function(assert) {
-  assert.expect(2);
+test('check if bonfire is in config', function(assert) {
+  assert.equal(Object.hasOwnProperty.call(ENV.APP, 'bonfire'), true);
+});
 
-  // creates the component instance
-  var component = this.subject();
-  assert.equal(component._state, 'preRender');
-
-  // renders the component to the page
-  this.render();
-  assert.equal(component._state, 'inDOM');
+test('check if bonfire title is in config', function(assert) {
+  assert.equal(Object.hasOwnProperty.call(ENV.APP.bonfire, 'title'), true);
 });
